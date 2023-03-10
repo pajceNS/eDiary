@@ -1,0 +1,9 @@
+package com.eDiary.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.eDiary.entities.ClassEntity;
+
+public interface ClassRepository extends CrudRepository<ClassEntity, Integer> {
+	
+}

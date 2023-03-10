@@ -1,0 +1,23 @@
+package com.eDiary.security;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+public class EncryptionUtil {
+	
+	public static String getEncodedPassword(String password) {
+		BCryptPasswordEncoder bce = new BCryptPasswordEncoder();
+		return bce.encode(password);
+	}
+
+	public static boolean validatePassword(String password, String encodedPassword) {
+		BCryptPasswordEncoder bce = new BCryptPasswordEncoder();
+		// menjamo zbog baze podataka
+		String replaceEncodedPassword = encodedPassword.replace("{bcrypt}", "");
+		return bce.matches(password, replaceEncodedPassword);
+	}
+	
+	public static void main(String[] args) {
+		//System.out.println(getEncodedPassword("sifra"));
+		System.out.println(validatePassword("sifra", "{bcrypt}$2a$10$nlycsRN4uHnfR02Pu6UIk.jb0NJjQ1aZ87A1ePSggGJoNAvA26GBm"));
+	}
+}

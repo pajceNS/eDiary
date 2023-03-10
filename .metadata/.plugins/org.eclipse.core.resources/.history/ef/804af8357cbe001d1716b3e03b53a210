@@ -1,0 +1,19 @@
+package com.eDiary.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.eDiary.entities.ClassEntity;
+import com.eDiary.entities.ParentEntity;
+import com.eDiary.entities.StudentEntity;
+
+public interface StudentRepository extends CrudRepository<StudentEntity, Integer> {
+	Boolean existsByUsername(String username);
+
+	Boolean existsByAttendingClass(ClassEntity attendingClass);
+
+	Iterable<StudentEntity> findByAttendingClass(ClassEntity attendingClass);
+	
+	Iterable<StudentEntity> findByParent(ParentEntity parent);
+	
+	StudentEntity findByUsername(String username);
+}

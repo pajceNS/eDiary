@@ -1,0 +1,40 @@
+2023-03-10 01:31:30.386  INFO 19384 --- [main] com.eDiary.ProjectApplication            : Starting ProjectApplication using Java 17.0.4.1 on Kadafi with PID 19384 (C:\Users\neman\E-diary\Project\target\classes started by neman in C:\Users\neman\E-diary\Project)
+2023-03-10 01:31:30.388  INFO 19384 --- [main] com.eDiary.ProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2023-03-10 01:31:30.929  INFO 19384 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-10 01:31:31.017  INFO 19384 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 11 JPA repository interfaces.
+2023-03-10 01:31:31.475  INFO 19384 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-03-10 01:31:31.485  INFO 19384 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-03-10 01:31:31.486  INFO 19384 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-03-10 01:31:31.590  INFO 19384 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-03-10 01:31:31.591  INFO 19384 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1164 ms
+2023-03-10 01:31:32.003  INFO 19384 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-03-10 01:31:32.299  INFO 19384 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-03-10 01:31:33.237  INFO 19384 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-10 01:31:33.627  WARN 19384 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-10 01:31:33.972  INFO 19384 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-10 01:31:33.980  INFO 19384 --- [main] com.eDiary.ProjectApplication            : Started ProjectApplication in 3.935 seconds (JVM running for 4.567)
+2023-03-10 01:33:35.072  INFO 19384 --- [RMI TCP Connection(10)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-03-10 01:33:35.079  INFO 19384 --- [RMI TCP Connection(10)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-03-10 01:33:35.088  INFO 19384 --- [RMI TCP Connection(10)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-10 01:33:35.089  INFO 19384 --- [RMI TCP Connection(10)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-03-10 01:33:35.094  INFO 19384 --- [RMI TCP Connection(10)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-03-10 13:31:52.549  INFO 5708 --- [main] com.eDiary.ProjectApplication            : Starting ProjectApplication using Java 17.0.4.1 on Kadafi with PID 5708 (C:\Users\neman\E-diary\Project\target\classes started by neman in C:\Users\neman\E-diary\Project)
+2023-03-10 13:31:52.552  INFO 5708 --- [main] com.eDiary.ProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2023-03-10 13:31:53.340  INFO 5708 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-10 13:31:53.413  INFO 5708 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 11 JPA repository interfaces.
+2023-03-10 13:31:53.848  INFO 5708 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-03-10 13:31:53.856  INFO 5708 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-03-10 13:31:53.857  INFO 5708 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-03-10 13:31:53.957  INFO 5708 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-03-10 13:31:53.957  INFO 5708 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1368 ms
+2023-03-10 13:31:54.355  INFO 5708 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-03-10 13:31:54.641  INFO 5708 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-03-10 13:31:55.564  INFO 5708 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-10 13:31:55.932  WARN 5708 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-10 13:31:56.262  INFO 5708 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-10 13:31:56.270  INFO 5708 --- [main] com.eDiary.ProjectApplication            : Started ProjectApplication in 4.051 seconds (JVM running for 4.676)
+2023-03-10 13:47:40.847  INFO 5708 --- [RMI TCP Connection(25)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-03-10 13:47:40.856  INFO 5708 --- [RMI TCP Connection(25)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-03-10 13:47:40.865  INFO 5708 --- [RMI TCP Connection(25)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-10 13:47:40.866  INFO 5708 --- [RMI TCP Connection(25)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-03-10 13:47:40.872  INFO 5708 --- [RMI TCP Connection(25)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

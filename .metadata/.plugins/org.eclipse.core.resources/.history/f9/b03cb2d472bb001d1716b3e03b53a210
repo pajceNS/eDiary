@@ -1,0 +1,76 @@
+package com.eDiary.entities;
+
+import java.time.ZonedDateTime;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+
+import com.eDiary.entities.enums.EGradeType;
+import com.eDiary.entities.enums.EGradeValue;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Entity
+@Table(name = "grade")
+public class GradeEntity {
+	@Id
+	@GeneratedValue
+	private Integer id;
+
+	// @Column
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Grade value must not be null.")
+	private EGradeValue value;
+
+	// @Column
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Grade type must not be null.")
+	private EGradeType type;
+
+	@Column
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy HH:mm")
+	private ZonedDateTime dateUTC;
+
+	@Column
+	private Boolean finalGrade;
+
+	@Column
+	private Boolean deleted;
+
+	@Version
+	private Integer version;
+
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(name = "studentTeacherSubject")
+	private StudentTeacherSubjectEntity studentTeacherSubject;
+
+	public GradeEntity() {
+		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+}

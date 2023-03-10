@@ -1,0 +1,14 @@
+package com.eDiary.services;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class TeacherServiceImpl implements TeacherService {
+
+	@Override
+	public boolean isActive(Integer id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

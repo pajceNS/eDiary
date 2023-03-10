@@ -1,0 +1,5 @@
+package com.eDiary.advices;
+
+public class GlobalExceptionAdvice {
+
+}

@@ -1,0 +1,47 @@
+package com.eDiary.entities.dto;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import com.eDiary.entities.enums.ESchoolYear;
+
+public class ClassDto {
+
+	@NotNull(message = "Class number must be specified.")
+	@Pattern(regexp = "^[1-9{n}]$", message = "Class number must be in range of 1-9.")
+	private String classNumber;
+
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Year must be specified.")
+	private ESchoolYear year;
+
+	public ClassDto() {
+		super();
+	}
+
+	public ClassDto(
+			@NotNull(message = "Class number must be specified.") @Pattern(regexp = "^[1-9{n}]$", message = "Class number must be in range of 1-9.") String classNumber,
+			@NotNull(message = "Year must be specified.") ESchoolYear year) {
+		super();
+		this.classNumber = classNumber;
+		this.year = year;
+	}
+
+	public String getClassNumber() {
+		return classNumber;
+	}
+
+	public void setClassNumber(String classNumber) {
+		this.classNumber = classNumber;
+	}
+
+	public ESchoolYear getYear() {
+		return year;
+	}
+
+	public void setYear(ESchoolYear year) {
+		this.year = year;
+	}
+}

@@ -1,0 +1,51 @@
+package com.eDiary.entities;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
+@Table(name = "parent")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class ParentEntity extends UserEntity {
+
+	@Column
+	private String email;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	private Iterable<StudentEntity> children;
+
+	public ParentEntity() {
+		super();
+	}
+
+	public ParentEntity(String email, Iterable<StudentEntity> children) {
+		super();
+		this.email = email;
+		this.children = children;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Iterable<StudentEntity> getChildren() {
+		return children;
+	}
+
+	public void setChildren(Iterable<StudentEntity> children) {
+		this.children = children;
+	}
+}

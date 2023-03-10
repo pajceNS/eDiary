@@ -1,0 +1,50 @@
+package com.eDiary.entities;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
+@Table(name = "teacher")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class TeacherEntity extends UserEntity {
+
+	@OneToOne(mappedBy = "supervisorTeacher", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JsonBackReference
+	private ClassEntity supervisesClass;
+
+	@OneToMany(mappedBy = "teacher", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JsonBackReference
+	private Iterable<TeacherSubjectEntity> teacherSubject;
+
+	public TeacherEntity() {
+		super();
+	}
+
+	public TeacherEntity(Integer id, String firstName, String lastName, String username, String password, String email,
+			RoleEntity role, Boolean deleted, Integer version) {
+		super(id, firstName, lastName, username, password, email, role, deleted, version);
+	}
+
+	public ClassEntity getSupervisesClass() {
+		return supervisesClass;
+	}
+
+	public void setSupervisesClass(ClassEntity supervisesClass) {
+		this.supervisesClass = supervisesClass;
+	}
+
+	public Iterable<TeacherSubjectEntity> getTeacherSubject() {
+		return teacherSubject;
+	}
+
+	public void setTeacherSubject(Iterable<TeacherSubjectEntity> teacherSubject) {
+		this.teacherSubject = teacherSubject;
+	}
+}

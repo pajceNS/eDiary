@@ -1,0 +1,13 @@
+package com.eDiary.services;
+
+import java.util.List;
+
+import com.eDiary.entities.StudentEntity;
+
+public interface ClassService {
+
+	Boolean isActive(Integer id);
+
+	List<StudentEntity> addSubjectForEntireClass(Integer classId, Integer subjectId, Integer teacherId);
+
+}

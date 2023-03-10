@@ -1,0 +1,42 @@
+package com.eDiary.security;
+
+import java.io.IOException;
+
+import javax.crypto.SecretKey;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.filter.OncePerRequestFilter;
+
+public class JWTAuthorizationFilter extends OncePerRequestFilter {
+
+	private final String HEADER = "Authorization";
+	private final String PREFIX = "Bearer ";
+	private SecretKey secretKey;
+	
+	public JWTAuthorizationFilter(SecretKey secretKey) {
+		super();
+		this.secretKey = secretKey;
+	}
+
+	private Boolean checkIfJWTTokenExists(HttpServletRequest request) {
+		String authorizationHeaderValue = request.getHeader(HEADER);
+		if(authorizationHeaderValue == null || !authorizationHeaderValue.startsWith(PREFIX)) {
+			return false;
+		}
+		return true;
+	}
+
+	private Claims validateToken(HttpServletRequest request) {
+		String jwtToken = request.getHeader(HEADER).replace(PREFIX, "");
+		
+	}
+	
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+	}
+
+}

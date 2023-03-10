@@ -1,0 +1,11 @@
+package com.eDiary.services;
+
+import java.util.List;
+
+import com.eDiary.entities.StudentEntity;
+
+public interface ClassService {
+
+	Boolean isActive(Integer id);
+
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=Project/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.eDiary.services{SubjectService.java[SubjectService" modifiers="513" timestamp="1677598686630"/>
+    <typeInfo handle="=Project/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.eDiary.services{ParentService.java[ParentService" modifiers="513" timestamp="1677601515522"/>
+    <typeInfo handle="=Project/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.eDiary.services{GradeService.java[GradeService" modifiers="513" timestamp="1675724207757"/>
+    <typeInfo handle="=Project/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.eDiary.services{FileHandlerService.java[FileHandlerService" modifiers="513" timestamp="1678373472391"/>
+    <typeInfo handle="=Project/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.eDiary.services{ClassService.java[ClassService" modifiers="513" timestamp="1678399495024"/>
+    <typeInfo handle="=Project/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.eDiary.services{AdminService.java[AdminService" modifiers="513" timestamp="1675724492995"/>
+    <typeInfo handle="=Project/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.eDiary.repositories{StudentRepository.java[StudentRepository" modifiers="513" timestamp="1678393187573"/>
+    <typeInfo handle="=Project/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.eDiary.services{TeacherService.java[TeacherService" modifiers="513" timestamp="1678370484390"/>
+    <typeInfo handle="=Project/C:\/Users\/neman\/.m2\/repository\/org\/springframework\/data\/spring-data-commons\/2.7.7\/spring-data-commons-2.7.7.jar=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-commons=/=/maven.version=/2.7.7=/=/maven.scope=/compile=/=/maven.pomderived=/true=/&lt;org.springframework.data.repository(CrudRepository.class[CrudRepository" modifiers="1537" timestamp="1674754373127"/>
+</typeInfoHistroy>

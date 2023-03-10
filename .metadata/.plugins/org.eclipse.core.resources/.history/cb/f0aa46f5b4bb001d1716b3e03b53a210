@@ -1,0 +1,22 @@
+package com.eDiary.security;
+
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.SecurityFilterChain;
+
+@EnableWebSecurity
+@EnableMethodSecurity(securedEnabled = true)
+public class SpringSecurityConfig {
+	//example basic auth
+	
+	private AuthenticationEntryPoint authenticationEntryPoint;
+	
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().httpBasic()
+		.authenticationEntryPoint(authenticationEntryPoint);
+
+return http.build();
+	}
+}

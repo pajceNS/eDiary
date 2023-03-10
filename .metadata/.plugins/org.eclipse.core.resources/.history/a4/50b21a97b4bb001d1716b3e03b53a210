@@ -1,0 +1,6 @@
+package com.eDiary.security;
+
+@enableweb
+public class SpringSecurityConfig {
+	//example basic auth
+}

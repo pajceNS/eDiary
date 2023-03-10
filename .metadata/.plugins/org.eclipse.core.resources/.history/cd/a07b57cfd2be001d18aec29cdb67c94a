@@ -1,0 +1,5 @@
+package com.eDiary.entities.enums;
+
+public enum EUserRole {
+	ADMIN, TEACHER, STUDENT, PARENT
+}

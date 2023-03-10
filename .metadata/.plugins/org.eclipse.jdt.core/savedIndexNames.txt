@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+C:\Users\neman\E-diary\.metadata\.plugins\org.eclipse.jdt.core
+449384428.index

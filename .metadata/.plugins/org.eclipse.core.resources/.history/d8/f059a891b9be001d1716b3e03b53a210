@@ -1,0 +1,7 @@
+package com.eDiary.services;
+
+public interface TeacherSubjectService {
+
+	Boolean isActive(Integer teacherSubjectId);
+
+}

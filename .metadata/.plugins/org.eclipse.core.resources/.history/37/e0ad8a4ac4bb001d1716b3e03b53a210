@@ -1,0 +1,5 @@
+package com.eDiary.entities.dto;
+
+public class UserDto {
+
+}

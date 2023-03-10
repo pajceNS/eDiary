@@ -1,0 +1,22 @@
+package com.eDiary.security;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+public class EncryptionUtil {
+	
+	public static String getEncryptetPassword(String password) {
+		BCryptPasswordEncoder bcEncoder = new BCryptPasswordEncoder();
+		return bcEncoder.encode(password);
+	}
+
+	public static boolean validatePassword(String password, String encodedPassword) {
+		BCryptPasswordEncoder bce = new BCryptPasswordEncoder();
+		// menjamo zbog baze podataka
+		String replaceEncodedPassword = encodedPassword.replace("{bcrypt}", "");
+		return bce.matches(password, replaceEncodedPassword);
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(getEncryptetPassword("lozinka"));
+	}
+}

@@ -1,0 +1,200 @@
+package com.eDiary.controllers;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.eDiary.entities.ClassEntity;
+import com.eDiary.entities.StudentEntity;
+import com.eDiary.entities.SubjectEntity;
+import com.eDiary.entities.TeacherEntity;
+import com.eDiary.entities.dto.ClassDto;
+import com.eDiary.entities.util.RESTError;
+import com.eDiary.repositories.ClassRepository;
+import com.eDiary.repositories.StudentRepository;
+import com.eDiary.repositories.SubjectRepository;
+import com.eDiary.repositories.TeacherRepository;
+import com.eDiary.repositories.TeacherSubjectRepository;
+import com.eDiary.services.ClassService;
+import com.eDiary.services.SubjectService;
+import com.eDiary.services.TeacherService;
+import com.eDiary.validation.ClassValidator;
+
+@RestController
+@RequestMapping(value = "/api/v1/classes")
+public class ClassController {
+
+	// private final Logger logger = (Logger)
+	// LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private ClassRepository classRepository;
+
+	@Autowired
+	private ClassService classService;
+
+	@Autowired
+	private ClassValidator classValidator;
+
+	@Autowired
+	private SubjectRepository subjectRepository;
+
+	@Autowired
+	private TeacherRepository teacherRepository;
+
+	@Autowired
+	private TeacherSubjectRepository teacherSubjectRepository;
+
+	@Autowired
+	private SubjectService subjectService;
+
+	@Autowired
+	private TeacherService teacherService;
+
+	@Autowired
+	private StudentRepository studentRepository;
+
+	@InitBinder
+	protected void initBinder(final WebDataBinder binder) {
+		binder.addValidators(classValidator);
+	}
+
+	private String createErrorMessage(BindingResult result) {
+		return result.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining(" "));
+	}
+
+	// get all
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<?> getAll() {
+		try {
+			return new ResponseEntity<>((List<ClassEntity>) classRepository.findAll(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<RESTError>(new RESTError(1, "Internal server error."),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	// get by id
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	public ResponseEntity<?> getById(@PathVariable Integer id) {
+		if (classRepository.existsById(id) && classService.isActive(id)) {
+			return new ResponseEntity<ClassEntity>(classRepository.findById(id).get(), HttpStatus.OK);
+		}
+		return new ResponseEntity<RESTError>(new RESTError(2, "Class not found."), HttpStatus.NOT_FOUND);
+	}
+
+	// add new class
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<?> addClass(@Valid @RequestBody ClassDto newClass, BindingResult result) {
+		if (result.hasErrors()) {
+			return new ResponseEntity<>(createErrorMessage(result), HttpStatus.BAD_REQUEST);
+		} else {
+			classValidator.validate(newClass, result);
+		}
+		ClassEntity schoolClass = new ClassEntity();
+		schoolClass.setDeleted(false);
+		schoolClass.setClassNumber(newClass.getClassNumber());
+		schoolClass.setYear(newClass.getYear());
+		schoolClass.setYear(newClass.getYear());
+		classRepository.save(schoolClass);
+		return new ResponseEntity<ClassEntity>(schoolClass, HttpStatus.OK);
+	}
+
+	// update class
+	@RequestMapping(method = RequestMethod.PUT, value = "/{classId}")
+	public ResponseEntity<?> updateClass(@PathVariable Integer classId, @Valid @RequestBody ClassDto uClass,
+			BindingResult result) {
+		if (classRepository.existsById(classId) && classService.isActive(classId)) {
+			if (result.hasErrors()) {
+				return new ResponseEntity<>(createErrorMessage(result), HttpStatus.BAD_REQUEST);
+			}
+			ClassEntity clazz = classRepository.findById(classId).get();
+			clazz.setYear(uClass.getYear());
+			classRepository.save(clazz);
+			// logger.info("Updated class with ID:" + classId.toString());
+			return new ResponseEntity<ClassEntity>(clazz, HttpStatus.OK);
+		}
+		return new ResponseEntity<RESTError>(new RESTError(3, "Class not found."), HttpStatus.NOT_FOUND);
+	}
+
+	// delete class
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+	public ResponseEntity<?> deleteById(@PathVariable Integer id) {
+		if (classRepository.existsById(id) && classService.isActive(id)) {
+			ClassEntity temp = classRepository.findById(id).get();
+			temp.setDeleted(true);
+			classRepository.save(temp);
+			// logger.info("Deleted class with ID: " + id.toString());
+			return new ResponseEntity<ClassEntity>(temp, HttpStatus.OK);
+		}
+		return new ResponseEntity<RESTError>(new RESTError(4, "Class not found."), HttpStatus.NOT_FOUND);
+	}
+
+	// add supervisor teacher
+	@RequestMapping(method = RequestMethod.POST, value = "/{classId}/supervisor/{teacherId}")
+	public ResponseEntity<?> addSupervisor() {
+		return null;
+	}
+
+	// update supervisor teacher
+	@RequestMapping(method = RequestMethod.PUT, value = "/{classId}/supervisor/{teacherId}")
+	public ResponseEntity<?> updateSupervisor() {
+		return null;
+	}
+
+	// add subject for all students in class
+	@RequestMapping(method = RequestMethod.POST, value = "/{classId}/subjects/{subjectId}/teachers/{teacherId}")
+	public ResponseEntity<?> addSubjectsForClass(@PathVariable Integer classId, @PathVariable Integer subjectId,
+			@PathVariable Integer teacherId) {
+		if (classRepository.existsById(classId) && classService.isActive(classId)) {
+			if (subjectRepository.existsById(subjectId) && subjectService.isActive(subjectId)) {
+				if (teacherRepository.existsById(teacherId) && teacherService.isActive(teacherId)) {
+					TeacherEntity teacher = teacherRepository.findById(teacherId).get();
+					SubjectEntity subject = subjectRepository.findById(subjectId).get();
+					if (teacherSubjectRepository.existsByTeacherAndCourse(teacher, subject)) {
+						if (studentRepository.existsByAttendingClass(classRepository.findById(classId).get())) {
+							List<StudentEntity> modifiedStudents = classService.addSubjectForEntireClass(classId,
+									subjectId, teacherId);
+							// logger.info("For class with ID " + classId.toString() + " added course with
+							// ID " + subjectId.toString());
+							return new ResponseEntity<List<StudentEntity>>(modifiedStudents, HttpStatus.OK);
+						}
+						return new ResponseEntity<RESTError>(new RESTError(9, "Class has no students."),
+								HttpStatus.BAD_REQUEST);
+					}
+					return new ResponseEntity<RESTError>(new RESTError(11, "Teacher course combination not found."),
+							HttpStatus.NOT_FOUND);
+				}
+				return new ResponseEntity<RESTError>(new RESTError(6, "Teacher not found."), HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<RESTError>(new RESTError(2, "Course not found."), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<RESTError>(new RESTError(1, "Class not found."), HttpStatus.NOT_FOUND);
+	}
+
+	// get all students for class
+	@RequestMapping(method = RequestMethod.GET, value = "/{classId}/students/")
+	public ResponseEntity<?> getAllStudentsForClass(@PathVariable Integer classId) {
+		if (classRepository.existsById(classId) && classService.isActive(classId)) {
+			ClassEntity clazz = classRepository.findById(classId).get();
+			List<StudentEntity> students = ((List<StudentEntity>) studentRepository.findByAttendingClass(clazz))
+					.stream().filter(student -> !student.getDeleted().equals(true)).collect(Collectors.toList());
+			return new ResponseEntity<List<StudentEntity>>(students, HttpStatus.OK);
+		}
+		return new ResponseEntity<RESTError>(new RESTError(1, "Class not found."), HttpStatus.NOT_FOUND);
+	}
+}

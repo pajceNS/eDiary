@@ -1,0 +1,7 @@
+package com.eDiary.services;
+
+public interface StudentTeacherSubjectService {
+
+	boolean isActive(Integer id);
+
+}

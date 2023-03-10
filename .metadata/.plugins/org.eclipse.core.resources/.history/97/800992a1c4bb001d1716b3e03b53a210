@@ -1,0 +1,59 @@
+package com.eDiary.controllers;
+
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.crypto.SecretKey;
+
+import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.eDiary.entities.UserEntity;
+
+import io.jsonwebtoken.Jwts;
+
+@RestController
+public class LoginController {
+	
+	@Value("${spring.security.token-duration}")
+	private Integer tokenDuration;
+	
+	@Autowired
+	private SecretKey secretKey;
+	
+	private String getJWTToken(UserEntity userEntity) {
+		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+				.commaSeparatedStringToAuthorityList(userEntity.getRole().getName());
+
+		String token = Jwts.builder().setId("softtekJWT").setSubject(userEntity.getEmail())
+				.claim("authorities",
+						grantedAuthorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+				.setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + this.tokenDuration)).signWith(this.secretKey)
+				.compact();
+		return "Bearer " + token;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, path = "api/v1/login")
+	public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
+		UserEntity user = userRepository.findByEmail(email);
+		if (user != null && Encryption.validatePassword(password, user.getPassword())) {
+			// create a token
+			String token = getJWTToken(user);
+			// create response with UserDTO
+			UserDTO retVal = new UserDTO(email, token);
+			return new ResponseEntity<UserDTO>(retVal, HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Wrong credentials", HttpStatus.UNAUTHORIZED);
+	}
+}

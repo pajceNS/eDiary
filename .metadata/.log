@@ -2132,3 +2132,6 @@ org.eclipse.core.runtime.CoreException: Launch configuration EncryptionUtil refe
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2023-03-10 13:53:58.112
 !MESSAGE The artifact mysql:mysql-connector-java:jar:8.0.31 has been relocated to com.mysql:mysql-connector-j:jar:8.0.31: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+
+!ENTRY org.eclipse.egit.ui 4 0 2023-03-10 13:55:28.007
+!MESSAGE Can't connect to any repository: 
